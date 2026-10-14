@@ -164,7 +164,20 @@ inst = launch(
 iid = inst["InstanceId"]
 print("instancia:", iid)
 ec2.get_waiter("instance_running").wait(InstanceIds=[iid])
-ip = ec2.describe_instances(InstanceIds=[iid])["Reservations"][0]["Instances"][0].get("PublicIpAddress")
-dns = ec2.describe_instances(InstanceIds=[iid])["Reservations"][0]["Instances"][0].get("PublicDnsName")
+
+# 5) Elastic IP: endereço fixo entre deploys (o link divulgado não muda)
+try:
+    eips = ec2.describe_addresses(Filters=[{"Name": "tag:Name", "Values": [TAG]}])["Addresses"]
+    if eips:
+        alloc = eips[0]["AllocationId"]
+    else:
+        alloc = ec2.allocate_address(Domain="vpc", TagSpecifications=[{
+            "ResourceType": "elastic-ip", "Tags": [{"Key": "Name", "Value": TAG}]}])["AllocationId"]
+    ec2.associate_address(AllocationId=alloc, InstanceId=iid, AllowReassociation=True)
+    time.sleep(5)
+    print("elastic ip: ok")
+except Exception as e:  # noqa: BLE001 - sem EIP, segue com o IP dinâmico
+    print("elastic ip indisponivel:", type(e).__name__)
+info = ec2.describe_instances(InstanceIds=[iid])["Reservations"][0]["Instances"][0]
 os.remove(zip_path)
-print(f"URL: http://{ip}  (DNS: http://{dns})")
+print(f"URL: http://{info.get('PublicDnsName')}  (IP {info.get('PublicIpAddress')})")

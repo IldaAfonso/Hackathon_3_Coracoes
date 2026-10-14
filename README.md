@@ -10,6 +10,23 @@ O DNA da Máquina junta, para cada número de série, a voz do consumidor
 do P&D. Com isso, responde a pergunta que hoje não volta para a engenharia:
 **a melhoria funcionou?**
 
+## 🔗 Acesse o app
+
+**http://ec2-100-22-157-45.us-west-2.compute.amazonaws.com**
+
+- Abra no navegador, sem login. Comece por uma área (**P&D** ou **Pós-venda**)
+  e, no **DNA da Máquina**, escolha uma das "Máquinas crônicas" da lista
+  (ex.: `G5PS000210933682`).
+- No menu **Assistente**, pergunte em português, por exemplo: *"O kit de
+  adaptação hidráulica reduziu os retornos?"*.
+- O 1º DNA de cada máquina leva ~15 s (a IA escreve o resumo na hora); depois
+  fica em cache.
+- Endereço fixo (Elastic IP), `http` sem certificado: o navegador mostra
+  "Não seguro", mas a página funciona. Se a rede bloquear, tente pelo 4G.
+- **Não use a tradução automática do navegador**: a página já é em português e
+  a tradução troca nomes próprios (ex.: "Amazon" por "Amazônia"). A interface
+  já pede ao navegador para não traduzir.
+
 | Equipe | Papel |
 |---|---|
 | Cristiano Sacramento | Engenharia mecânica / confiabilidade: modos de falha, premissas, caso ponta a ponta |
@@ -209,18 +226,21 @@ ambiente** (nada é gravado no projeto) e:
    liga à instância: o Bedrock continua funcionando depois que a credencial
    de quem publicou expira;
 4. sobe a instância com `docker compose` (frontend na porta 80,
-   `DNA_USE_BEDROCK=1`) e encerra a instância anterior do mesmo deploy.
+   `DNA_USE_BEDROCK=1`) e encerra a instância anterior do mesmo deploy;
+5. associa o **Elastic IP** `dna-maquina-mvp` (criado na 1ª vez e reaproveitado):
+   o link publicado não muda entre deploys.
 
 ```bash
 pip install boto3
 export AWS_DEFAULT_REGION=us-west-2 AWS_ACCESS_KEY_ID=... AWS_SECRET_ACCESS_KEY=... AWS_SESSION_TOKEN=...
 python scripts/deploy_ec2.py .        # ~4 min até a aplicação responder
+# (ou deixe as variáveis AWS_* no .env da raiz, que não é versionado, e carregue antes de rodar)
 ```
 
 > **Atenção:** o deploy é **público e sem login**. A API, o `/mcp` e o
 > assistente ficam abertos a qualquer pessoa com o link, e cada pergunta ao
 > assistente gera custo de Bedrock. Use só para a demo e apague os recursos
-> depois (instância, security group, bucket e papel IAM `dna-maquina-mvp`).
+> depois (instância, Elastic IP, security group, bucket e papel IAM `dna-maquina-mvp`).
 > Para produção, ver "Caminho para POC" abaixo.
 
 ## Premissas sobre os dados (leia antes de apresentar)
