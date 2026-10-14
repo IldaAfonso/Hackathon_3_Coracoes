@@ -1,0 +1,17 @@
+# Validação com a base SINTÉTICA, isolada da base real (projeto e volumes
+# próprios) e em outra porta:
+#   make sintetico        # http://localhost:8090
+#   make sintetico-down
+# Começa com a base inicial e SEM melhorias: a demonstração ponta a ponta
+# (importar a base, inserir os boletins) está em docs/VALIDACAO.md.
+# Não contém dado real nem pessoal. Ver docs/VALIDACAO.md.
+name: dna-sintetico
+
+services:
+  backend:
+    volumes:
+      - ./data/synthetic/inicial:/app/data/raw:ro
+      - ./data/synthetic/melhorias_vazia.json:/app/data/melhorias.json:ro
+  frontend:
+    ports: !override
+      - "8090:8080"

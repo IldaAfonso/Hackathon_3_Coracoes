@@ -1,0 +1,42 @@
+[
+  {
+    "modelo": "Passione",
+    "sintoma_alvo": "Máquina vazando",
+    "pecas": [],
+    "termos_evidencia": [],
+    "serie_inicial": "G5PS000210224033",
+    "id": "SINT-BANDEJA",
+    "codigo": "MEL-G5-CS-0001-Y",
+    "titulo": "Bandeja de cápsulas (sintética)",
+    "documento": "Boletim sintético 01",
+    "data_documento": "2022-04-22",
+    "tipo": "corte_serie",
+    "componentes_alvo": [
+      "bandeja"
+    ],
+    "flag_evidencia": "mexeu_bandeja",
+    "objetivo": "Efeito plantado: vazamento 32% para 16%."
+  },
+  {
+    "modelo": "Passione",
+    "sintoma_alvo": "Máquina vazando",
+    "pecas": [
+      "9000001 - TUBO SINTETICO"
+    ],
+    "termos_evidencia": [
+      "adapta"
+    ],
+    "serie_inicial": null,
+    "id": "SINT-KIT",
+    "codigo": "MEL-G5-RF-0001-B",
+    "titulo": "Adaptação hidráulica (sintética)",
+    "documento": "Boletim sintético 02",
+    "data_documento": "2022-10-11",
+    "tipo": "retrofit_campo",
+    "componentes_alvo": [
+      "conexoes"
+    ],
+    "flag_evidencia": "fez_adaptacao_hidraulica",
+    "objetivo": "Efeito plantado: nenhum."
+  }
+]

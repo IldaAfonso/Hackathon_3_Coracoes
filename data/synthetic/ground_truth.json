@@ -1,0 +1,15 @@
+{
+  "bandeja": {
+    "serie_corte": "G5PS000210224033",
+    "vazamento_antes": 0.32,
+    "vazamento_depois": 0.16,
+    "veredito": "Funcionou"
+  },
+  "kit": {
+    "codigo": "MEL-G5-RF-0001-B",
+    "veredito": "Sem efeito mensurável"
+  },
+  "cronicas_planejadas": 25,
+  "telefone_falso": "(11) 90000-0000",
+  "chamados": 9940
+}

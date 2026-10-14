@@ -1,0 +1,65 @@
+[
+  {
+    "id": "G5-BANDEJA-2022",
+    "titulo": "Atualização na bandeja de cápsulas",
+    "documento": "Informativo Técnico rev. 01 (BTG5 - Bandeja de cápsulas)",
+    "modelo": "Passione",
+    "data_documento": "2022-04-22",
+    "tipo": "corte_serie",
+    "serie_inicial": "G5PS000210224033",
+    "sintoma_alvo": "Máquina vazando",
+    "componentes_alvo": [
+      "bandeja",
+      "vedacao_oring",
+      "conexoes_hidraulicas"
+    ],
+    "flag_evidencia": "mexeu_bandeja",
+    "objetivo": "Eliminar os vazamentos de água. Mudança de projeto aplicada na fábrica a partir do número de série indicado.",
+    "pecas": [],
+    "codigo": "MEL-G5-CS-0001-Y",
+    "termos_evidencia": []
+  },
+  {
+    "id": "G5-ORING-ANEL-2022",
+    "titulo": "Vazamento no suporte do anel (O-ring)",
+    "documento": "Boletim Técnico 06/09/2022, rev. 21/09/2023 (BTG5 - Oring do Suporte do anel)",
+    "modelo": "Passione",
+    "data_documento": "2022-09-06",
+    "tipo": "retrofit_campo",
+    "serie_inicial": null,
+    "sintoma_alvo": "Máquina vazando",
+    "componentes_alvo": [
+      "vedacao_oring"
+    ],
+    "flag_evidencia": "trocou_oring_anel",
+    "objetivo": "O-ring do anel pode ser danificado na montagem. Técnico deve checar e trocar quando houver deformidade. Vale para qualquer série.",
+    "pecas": [
+      "3000017 - ANEL VEDAÇÃO SILIC VM 5X2MM"
+    ],
+    "codigo": "MEL-G5-RF-0001-B",
+    "termos_evidencia": []
+  },
+  {
+    "id": "G5-ADAPT-HIDR-2022",
+    "titulo": "Adaptação hidráulica",
+    "documento": "Boletim Técnico 11/10/2022, rev. 21/09/2023 (BTG5 - Adaptação Hidráulica)",
+    "modelo": "Passione",
+    "data_documento": "2022-10-11",
+    "tipo": "retrofit_campo",
+    "serie_inicial": null,
+    "sintoma_alvo": "Máquina vazando",
+    "componentes_alvo": [
+      "conexoes_hidraulicas"
+    ],
+    "flag_evidencia": "fez_adaptacao_hidraulica",
+    "objetivo": "Eliminar os vazamentos constantes. Kit aplicado pelo técnico em campo, em qualquer série.",
+    "pecas": [
+      "3002832 - TUBO SILIC G1 LOV 4 cm",
+      "3002832 - TUBO SILIC G1 LOV 13 cm",
+      "3002821 - CONECTOR TUBO G1 LOV",
+      "3000053 - JUNÇÃO \"T\""
+    ],
+    "codigo": "MEL-G5-RF-0002-R",
+    "termos_evidencia": []
+  }
+]

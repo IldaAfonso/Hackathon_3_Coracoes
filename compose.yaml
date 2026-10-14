@@ -1,0 +1,72 @@
+# DNA da Máquina: frontend e backend separados.
+#   docker compose up --build                 # interface em http://localhost:8080
+#   docker compose --profile legacy up streamlit   # interface antiga (Streamlit), opcional
+#
+# O backend NÃO publica porta: só o frontend (nginx) o alcança, pela rede interna.
+# A planilha real é montada somente leitura e nunca entra em imagem.
+name: dna-maquina
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: dna-maquina-backend:mvp
+    user: "${DNA_UID:-1000}:${DNA_GID:-1000}"   # precisa ler data/raw (DNA_UID=$(id -u) se o seu não for 1000)
+    volumes:
+      - ./data/raw:/app/data/raw:ro
+      - dna_processed:/app/data/processed
+      - dna_cache:/app/data/cache
+      - dna_models:/app/models
+      - dna_state:/app/state                     # catálogo de melhorias do P&D (sobrevive a reinícios)
+    environment:
+      - DNA_CORA_URL                             # onde o navegador abre a Cora (ex.: http://localhost:8000); vazio = só plano B
+      - DNA_MCP_ALLOWED_HOSTS                    # hosts aceitos no /mcp (padrão: localhost, host.docker.internal, nomes da rede)
+      # Bedrock: só para o resumo em texto da página DNA (opcional). O assistente é a Cora.
+      - DNA_USE_BEDROCK
+      - AWS_REGION
+      - BEDROCK_MODEL_ID
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_SESSION_TOKEN
+      - DNA_LOG_LEVEL
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    image: dna-maquina-frontend:mvp
+    environment:
+      CORA_FRAME_SRC: "${DNA_CORA_URL:-'none'}"  # libera o iframe da Cora na CSP (e só ele)
+    ports:
+      - "8080:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+  streamlit:                                     # interface antiga, mantida como alternativa
+    profiles: ["legacy"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.streamlit
+    image: dna-maquina-streamlit:legacy
+    user: "${DNA_UID:-1000}:${DNA_GID:-1000}"
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data/raw:/app/data/raw:ro
+      - st_processed:/app/data/processed
+      - st_cache:/app/data/cache
+      - st_models:/app/models
+
+volumes:
+  dna_processed:
+  dna_cache:
+  dna_models:
+  dna_state:
+  st_processed:
+  st_cache:
+  st_models:

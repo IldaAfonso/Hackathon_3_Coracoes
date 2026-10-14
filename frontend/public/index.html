@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DNA da Máquina · TRES</title>
+  <meta name="description" content="Histórico confiável de cada máquina TRES, ligado pelo número de série: Customer Success, Pós-vendas e P&D na mesma história.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/assets/brand/3coracoes.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <div class="topbar">
+    <div class="wrap topbar__inner">
+      <span class="topbar__label">Protótipo do hackathon · Desafio 01 · TRES®</span>
+      <span class="topbar__brands" aria-label="Marcas do desafio">
+        <img src="/assets/brand/3coracoes.png" alt="3corações" width="28" height="28">
+        <img src="/assets/brand/tres.png" alt="TRES" width="47" height="22">
+      </span>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="wrap header__inner">
+      <a class="brand" href="#/" aria-label="DNA da Máquina, página inicial">
+        <img class="brand__logo" src="/assets/brand/mercafe-logo.svg" alt="Mercafé" width="72" height="40">
+        <span class="brand__name">DNA da Máquina</span>
+      </a>
+      <form class="search" id="busca" role="search">
+        <label class="sr-only" for="busca-serie">Buscar máquina pelo número de série</label>
+        <input id="busca-serie" name="serie" type="search" autocomplete="off"
+               placeholder="Buscar pelo número de série, ex.: G5PS000210224033">
+        <button type="submit" class="search__go" aria-label="Abrir o DNA da máquina">Buscar</button>
+      </form>
+    </div>
+    <nav class="wrap nav" id="menu" aria-label="Principal"></nav>
+  </header>
+
+  <main id="conteudo" class="wrap main" tabindex="-1" aria-live="polite"></main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p><strong>DNA da Máquina</strong> · Hackathon Cafeína Week 2026 · FIAP × 3corações × AWS.
+         Dados reais e anonimizados fornecidos pelo desafio, usados só no contexto do evento.</p>
+      <p class="footer__legal">As marcas Mercafé, 3corações e TRES pertencem aos seus titulares e aparecem
+         aqui como referência visual do desafio, com atribuição (Art. 32 do regulamento). Este protótipo não é um produto oficial.</p>
+      <p id="rodape-meta" class="footer__legal"></p>
+    </div>
+  </footer>
+
+  <script src="/vendor/chart.umd.js"></script>
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

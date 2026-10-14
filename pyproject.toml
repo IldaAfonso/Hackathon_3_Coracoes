@@ -1,0 +1,15 @@
+[project]
+name = "dna-maquina"
+version = "0.1.0"
+description = "DNA da Máquina — histórico por máquina e impacto de melhorias de engenharia (Desafio TRES, Cafeína Week 2026)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "backend"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint.isort]
+known-first-party = ["app", "dna_maquina"]

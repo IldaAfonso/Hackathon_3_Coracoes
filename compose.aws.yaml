@@ -1,0 +1,14 @@
+# OPCIONAL: usa o seu perfil AWS (SSO ou ~/.aws) dentro do backend.
+# Só use se a máquina NÃO tiver chaves em variáveis de ambiente.
+#
+#   AWS_PROFILE=meu-perfil docker compose -f compose.yaml -f compose.aws.yaml up -d
+#
+# Atenção: monta ~/.aws em modo somente leitura dentro do container. Prefira
+# exportar credenciais temporárias (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY,
+# AWS_SESSION_TOKEN) no terminal e subir só com o compose.yaml.
+services:
+  backend:
+    environment:
+      - AWS_PROFILE
+    volumes:
+      - ${HOME}/.aws:/home/app/.aws:ro

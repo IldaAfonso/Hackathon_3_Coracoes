@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+data/processed/
+# Não versionar a planilha se o repositório for público:
+# data/raw/*.xlsx
+models/
+
+# dados do desafio: reais e anonimizados, só para uso no evento (Art. 37)
+data/raw/*.xlsx
+data/processed/
+data/cache/
+models/
+
+# nunca versionar: segredos e material com dados reais
+.env
+.env.*
+demo-offline/
+docs/screens/
+*.zip
+
+# Posição de estoque importada e marcações (dados da empresa)
+data/estoque/

@@ -1,0 +1,20 @@
+--- a/cora-backend/mcp_runtime.py	2026-10-14 09:04:44.055505664 -0300
++++ b/cora-backend/mcp_runtime.py	2026-10-14 09:04:44.080842403 -0300
+@@ -13,6 +13,7 @@
+ """
+ 
+ import logging
++import uuid
+ from contextlib import ExitStack
+ from dataclasses import dataclass, field
+ from datetime import datetime, timedelta, timezone
+@@ -282,6 +283,9 @@
+     """Monta o kit MCP do usuário para UMA geração. Roda em thread
+     (asyncio.to_thread) — cada MCPClient tem seu próprio event loop interno."""
+     kit = McpToolkit()
++    # chat.py envia str(user["id"]); o RBAC indexa por UUID (KeyError em
++    # rbac.users_groups para quem tem grupo explícito, ex.: administradores).
++    user_id = uuid.UUID(str(user_id))
+ 
+     with db_session() as db:
+         # Interruptor geral do usuário (app, 2026-09-06): desligado, nenhuma
